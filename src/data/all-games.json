@@ -1,0 +1,14 @@
+[
+  {
+    "id": 0,
+    "name": "Kiwi Clicker - Juiced Up",
+    "style": "generic",
+    "features": ["unfolding", "prestige"],
+    "platforms": {
+      "steam": {
+        "id": "1980530",
+        "link": "https://store.steampowered.com/app/1980530/Kiwi_Clicker__Juiced_Up/"
+      }
+    }
+  }
+]

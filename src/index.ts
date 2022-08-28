@@ -22,10 +22,6 @@ const LINKS_TO_IGNORE = [
 const GAME_LINKS = [{
   platform: Platform.Steam,
   linkMatcher: /store.steampowered.com\/app\/(\d+)\/[^\/]+\//,
-  nameLookup: async (id: string) => {
-    const response = await axios.get('http://store.steampowered.com/api/appdetails/?appids=' + id);
-    return response.data[id].data.name;
-  }
 }];
 /* *
   'play.google.com',

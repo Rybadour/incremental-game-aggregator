@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "report": "ts-node src/index.ts"
+    "save-games": "ts-node src/save-games.ts",
+    "reddit": "ts-node src/reddit-extract.ts"
   },
   "author": "",
   "license": "ISC",

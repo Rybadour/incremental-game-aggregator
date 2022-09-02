@@ -1,14 +1,41 @@
 import React, { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { AppBar, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Switch, ToggleButton, Toolbar, Typography, useMediaQuery } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import './App.css';
+import AllGames from './components/all-games';
 
-import allGames from './data/all-games.json';
-import { upperFirst } from './util';
-import { AppBar, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Switch, ToggleButton, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const App = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBody />
+    </ThemeProvider>
+  );
+};
+
+function AppBody() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenu = () => {
@@ -18,28 +45,6 @@ const App = () => {
   const handleClose = () => {
     setIsMenuOpen(false);
   };
-
-  const columns = [{
-    field: 'name',
-    headerName: 'Name',
-    flex: 1,
-  }, {
-    field: 'style',
-    headerName: 'Game Style',
-    flex: 1,
-  }, {
-    field: 'features',
-    headerName: 'Features',
-    flex: 1,
-    valueFormatter: ({value}) => {
-      return value.join(', ');
-    }
-  }, {
-    field: 'platforms',
-    headerName: 'Platforms/Links',
-    flex: 1,
-    renderCell: PlatformCell
-  }];
 
   return (
     <div className="app">
@@ -95,29 +100,10 @@ const App = () => {
       </AppBar>
 
       <div className="app-body">
-        <div className="game-table">
-          <DataGrid
-            checkboxSelection={true}
-            columns={columns}
-            rows={allGames}
-          />
-        </div>
+        <AllGames />
       </div>
     </div>
   );
-};
-
-function PlatformCell({row}) {
-  return <span>
-    {Object.entries(row.platforms).map(([key, value]) => 
-      <a
-        href={value.link}
-        target="_blank"
-        rel="noreferrer"
-        key={key}
-      >{upperFirst(key)}</a>
-    )}
-  </span>;
 }
 
 export default App;

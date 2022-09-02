@@ -3,8 +3,8 @@ import fs from 'fs';
 import Snoowrap from "snoowrap";
 import {partition, uniq, uniqBy} from "lodash";
 
-import env from "./env";
-import { Link, NewGame, Platform } from './types';
+import env from "../env";
+import { Link, NewGame, Platform } from '../types';
 
 const URL_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 const LINK_REGEX = `\\[([^\\]]+)\\]\\((${URL_REGEX.source})\\)`;
@@ -33,6 +33,7 @@ const GAME_LINKS = [{
     'kongregate.com/games/',
     'itch.io',
     'github.com',
+    'github.io',
   ],
 }, {
   platform: Platform.IOS,
@@ -98,12 +99,12 @@ const GAME_LINKS = [{
   if (newGames.length > 0) {
     console.log('Found ' + newGames.length + ' new games. Look in new-games.json.');
   }
-  fs.writeFileSync('new-games.json', JSON.stringify(newGames, null, 2));
+  fs.writeFileSync('output/new-games.json', JSON.stringify(newGames, null, 2));
 
   if (allUncategorizedLinks.length > 0) {
     console.log('Found ' + allUncategorizedLinks.length + ' uncategorized links. Look in uncategorizedLinks.json.');
   }
-  fs.writeFileSync('uncategorizedLinks.json', JSON.stringify(allUncategorizedLinks, null, 2));
+  fs.writeFileSync('output/uncategorizedLinks.json', JSON.stringify(allUncategorizedLinks, null, 2));
 })();
 
 function getLinks(body: string) {

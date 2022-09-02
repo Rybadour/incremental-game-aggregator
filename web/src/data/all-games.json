@@ -1,0 +1,25 @@
+[
+  {
+    "id": 0,
+    "name": "Kiwi Clicker",
+    "style": "generic",
+    "features": ["unfolding", "prestige"],
+    "platforms": {
+      "steam": {
+        "id": "1980530",
+        "link": "https://store.steampowered.com/app/1980530/Kiwi_Clicker__Juiced_Up/"
+      }
+    }
+  },
+  {
+    "id": 1,
+    "name": "Milkyway Idle",
+    "style": "pbbg",
+    "features": ["multiplayer"],
+    "platforms": {
+      "web": {
+        "link": "https://www.milkywayidle.com/game"
+      }
+    }
+  }
+]

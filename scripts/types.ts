@@ -9,7 +9,7 @@ export interface NewGame {
 
 export interface GameLink {
   link: string;
-  platform: Platform,
+  platform: Platform;
 }
 
 export interface Link {
@@ -19,13 +19,14 @@ export interface Link {
 
 export interface Game {
   id: number;
-  name: string,
-  style: GameStyle,
-  features: GameFeature[]
-  platforms: Record<Platform, {
-    id: string,
-    link: string,
-  }>
+  name: string;
+  source: string;
+  platforms: Partial<Record<Platform, GamePlatform>>;
+}
+
+export interface GamePlatform {
+  id?: string;
+  link: string;
 }
 
 export enum Platform {

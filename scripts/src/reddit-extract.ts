@@ -18,6 +18,7 @@ const LINKS_TO_IGNORE = [
   'reddit.com/',
   'preview.redd.it/',
   'prnt.sc',
+  'fandom.com/wiki/'
 ];
 
 const GAME_LINKS = [{
@@ -66,25 +67,26 @@ const GAME_LINKS = [{
           return {gameLink, link};
         });
 
-        const [categorizedLinks, uncategorizedLinks] = partition(processedLinks, pl => pl.gameLink);
-
         allUncategorizedLinks = allUncategorizedLinks.concat(
-          uncategorizedLinks.map(cl => cl.link)
+          processedLinks
+            .filter(pl => !pl.gameLink)
+            .map(pl => pl.link)
         );
 
-        if (categorizedLinks.length > 0) {
+
+        if (processedLinks.length > 0) {
           const potentialNames = uniq([
             post.title,
-            ...categorizedLinks.map(cl => cl.link.text),
+            ...processedLinks.map(pl => pl.link.text),
           ]);
 
           newGames.push({
             name: potentialNames[0],
             source: 'http://reddit.com' + post.permalink,
             otherNames: potentialNames.slice(1),
-            links: categorizedLinks.map(cl => ({
+            links: processedLinks.map(cl => ({
               link: cl.link.url,
-              platform: cl.gameLink?.platform!,
+              platform: cl.gameLink?.platform ?? Platform.Web,
             })),
           });
         }

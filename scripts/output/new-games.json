@@ -1,6 +1,58 @@
 [
   {
-    "name": "Thank you r/incremental_games for kickstarting Tap Ninja. Today is the 1. year anniversary",
+    "name": "Progress Knight Reborn",
+    "source": "http://reddit.com/r/incremental_games/comments/x4a8un/progress_knight_reborn/",
+    "otherNames": [
+      "https://camerongott.github.io/progress-knight/"
+    ],
+    "links": [
+      {
+        "link": "https://camerongott.github.io/progress-knight/",
+        "platform": "Web"
+      }
+    ]
+  },
+  {
+    "name": "Immortality Idle",
+    "source": "http://reddit.com/r/incremental_games/comments/x46gxt/immortality_idle_immortality_races/",
+    "otherNames": [
+      "https://immortalityidle.github.io/"
+    ],
+    "links": [
+      {
+        "link": "https://immortalityidle.github.io/",
+        "platform": "Web"
+      }
+    ]
+  },
+  {
+    "name": "StateClicker",
+    "source": "http://reddit.com/r/incremental_games/comments/x3j6a0/stateclicker_found_this_game_seems_fun/",
+    "otherNames": [
+      "https://www.stateclicker.com/"
+    ],
+    "links": [
+      {
+        "link": "https://www.stateclicker.com/",
+        "platform": "Web"
+      }
+    ]
+  },
+  {
+    "name": "One Potato Incremental",
+    "source": "http://reddit.com/r/incremental_games/comments/x2gpxu/one_potato_incremental_has_been_revived_v03/",
+    "otherNames": [
+      "ONE POTATO INCREMENTAL V0.3"
+    ],
+    "links": [
+      {
+        "link": "https://sciencecrafter.github.io/one-potato-incremental/",
+        "platform": "Web"
+      }
+    ]
+  },
+  {
+    "name": "Tap Ninja",
     "source": "http://reddit.com/r/incremental_games/comments/x2fu1n/thank_you_rincremental_games_for_kickstarting_tap/",
     "otherNames": [
       "https://store.steampowered.com/app/1891700/",
@@ -23,10 +75,38 @@
     ]
   },
   {
-    "name": "Dunidle 7.0 public beta is here!!",
+    "name": "FE000000",
+    "source": "http://reddit.com/r/incremental_games/comments/x1vc60/appreciation_post_and_commentary_for_the_most_fun/",
+    "otherNames": [
+      "FE000000",
+      "Adding another link just in case"
+    ],
+    "links": [
+      {
+        "link": "https://dan-simon.github.io/misc/fe000000/",
+        "platform": "Web"
+      }
+    ]
+  },
+  {
+    "name": "The Plague Tree",
+    "source": "http://reddit.com/r/incremental_games/comments/x1a0d1/any_plague_tree_experts/",
+    "otherNames": [
+      "game"
+    ],
+    "links": [
+      {
+        "link": "https://c0v1d-9119361.github.io/The-Plague-Tree/",
+        "platform": "Web"
+      }
+    ]
+  },
+  {
+    "name": "Dunidle",
     "source": "http://reddit.com/r/incremental_games/comments/x0mcsa/dunidle_70_public_beta_is_here/",
     "otherNames": [
-      "https://play.google.com/store/apps/details?id=aratnon.pixel.idle.dungeon.dunidle"
+      "https://play.google.com/store/apps/details?id=aratnon.pixel.idle.dungeon.dunidle",
+      "https://testflight.apple.com/join/pwpdhkKj"
     ],
     "links": [
       {
@@ -36,7 +116,7 @@
     ]
   },
   {
-    "name": "Dragon BLast",
+    "name": "Dragon Blast",
     "source": "http://reddit.com/r/incremental_games/comments/wzgic0/dragon_blast/",
     "otherNames": [
       "https://pixelabor.itch.io/dragonblast"
@@ -44,12 +124,12 @@
     "links": [
       {
         "link": "https://pixelabor.itch.io/dragonblast",
-        "platform": "Web"
+        "platform": "Windows"
       }
     ]
   },
   {
-    "name": "Farmer Against Potatoes Idle has been released on Steam",
+    "name": "Farmer Against Potatoes Idle",
     "source": "http://reddit.com/r/incremental_games/comments/wz0msh/farmer_against_potatoes_idle_has_been_released_on/",
     "otherNames": [
       "Steam"
@@ -62,35 +142,7 @@
     ]
   },
   {
-    "name": "Autoclickers Not Working?",
-    "source": "http://reddit.com/r/incremental_games/comments/wyio3c/autoclickers_not_working/",
-    "otherNames": [
-      "Idle Quotes",
-      "Idle Tree.",
-      "Idle Evolution",
-      "Idle Slime.txt"
-    ],
-    "links": [
-      {
-        "link": "https://www.kongregate.com/games/CoolDroid/idle-quotes",
-        "platform": "Web"
-      },
-      {
-        "link": "https://www.kongregate.com/games/kingswill/idle-tree",
-        "platform": "Web"
-      },
-      {
-        "link": "https://www.kongregate.com/games/newproject1/idle-evolution",
-        "platform": "Web"
-      },
-      {
-        "link": "https://www.kongregate.com/games/kbvpneofit/idleslime-text",
-        "platform": "Web"
-      }
-    ]
-  },
-  {
-    "name": "Craftbound iOS like Melvor Idle",
+    "name": "Craftbound",
     "source": "http://reddit.com/r/incremental_games/comments/wygget/craftbound_ios_like_melvor_idle/",
     "otherNames": [
       "Craftbound - iOS Launched"
@@ -103,7 +155,7 @@
     ]
   },
   {
-    "name": "I just released a big content update for Kiwi Clicker - an incremental focused on empowering your playstyle and unlocking features and content without excessive grinding!",
+    "name": "Kiwi Clicker",
     "source": "http://reddit.com/r/incremental_games/comments/wyf61k/i_just_released_a_big_content_update_for_kiwi/",
     "otherNames": [
       "KIWI CLICKER ON STEAM",
@@ -121,20 +173,7 @@
     ]
   },
   {
-    "name": "Is this worth continuing?",
-    "source": "http://reddit.com/r/incremental_games/comments/wy5bfz/is_this_worth_continuing/",
-    "otherNames": [
-      "Idle Spacecraft Defense - Google Play"
-    ],
-    "links": [
-      {
-        "link": "https://play.google.com/store/apps/details?id=com.EmreSafa.IdleSpacecraftDefence",
-        "platform": "Android"
-      }
-    ]
-  },
-  {
-    "name": "Farmers Against Potatoes Idle in Early Access",
+    "name": "Farmers Against Potatoes Idle",
     "source": "http://reddit.com/r/incremental_games/comments/wxqj1m/farmers_against_potatoes_idle_in_early_access/",
     "otherNames": [
       "LINK"
@@ -147,20 +186,20 @@
     ]
   },
   {
-    "name": "SimpleOnline Android game",
+    "name": "SimpleOnline",
     "source": "http://reddit.com/r/incremental_games/comments/wxlg42/simpleonline_android_game/",
     "otherNames": [
       "https://play.google.com/store/apps/details?id=simple.online.sherry&hl=fr&gl=US"
     ],
     "links": [
       {
-        "link": "https://play.google.com/store/apps/details?id=simple.online.sherry&hl=fr&gl=US",
+        "link": "https://play.google.com/store/apps/details?id=simple.online.sherry",
         "platform": "Android"
       }
     ]
   },
   {
-    "name": "The Dust Tree - A Prestige Tree mod",
+    "name": "The Dust Tree",
     "source": "http://reddit.com/r/incremental_games/comments/wxh2kv/the_dust_tree_a_prestige_tree_mod/",
     "otherNames": [
       "https://raw.githack.com/chipsams/The-Modding-Tree/master/index.html"
@@ -173,15 +212,24 @@
     ]
   },
   {
-    "name": "After being well received on mobile, Paragon Pioneers, my city-building idle game, will come to Steam at the end of September!",
+    "name": "Paragon Pioneers",
     "source": "http://reddit.com/r/incremental_games/comments/wxe67a/after_being_well_received_on_mobile_paragon/",
     "otherNames": [
-      "https://store.steampowered.com/app/2103340/Paragon\\_Pioneers/"
+      "https://store.steampowered.com/app/2103340/Paragon\\_Pioneers/",
+      "https://paragonpioneers.com/"
     ],
     "links": [
       {
         "link": "https://store.steampowered.com/app/2103340/Paragon_Pioneers/",
         "platform": "Steam"
+      },
+      {
+        "link": "https://apps.apple.com/app/paragon-pioneers/id1599308482",
+        "platform": "IOS"
+      },
+      {
+        "link": "https://play.google.com/store/apps/details?id=com.GniGames.ParagonPioneers",
+        "platform": "Android"
       }
     ]
   }

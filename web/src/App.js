@@ -65,6 +65,7 @@ function AppBody() {
               id="menu-appbar"
               anchor="left"
               keepMounted
+              PaperProps={{style: {minWidth: 200}}}
               open={isMenuOpen}
               onClose={handleClose}
             >
@@ -86,8 +87,8 @@ function AppBody() {
                     </ListItemButton>
                   </ListItem>
                 ))}
-                <ListItem disablePadding>
-                  <Switch />
+                <ListItem>
+                  <FormControlLabel control={<Switch defaultChecked />} label="Dark Mode" />
                 </ListItem>
               </List>
             </Drawer>

@@ -1,0 +1,19 @@
+.all-games-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-table {
+  flex-grow: 1;
+}
+
+.platform-cell {
+  display: flex;
+  grid-gap: 10px;
+}
+
+.controls-cell {
+  display: flex;
+  grid-gap: 20px;
+}

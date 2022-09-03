@@ -8,30 +8,31 @@ import allGames from '../data/all-games.json';
 import { upperFirst } from '../util';
 
 import './all-games.css';
-import { Stack } from "@mui/system";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import { GameStatusContext } from "../contexts/game-status";
+import { Games } from "@mui/icons-material";
 
 function AllGames() {
+  const gameStatus = useContext(GameStatusContext);
   const [searchFilter, setSearchFilter] = useState('');
   const [platformFilter, setPlatformFilter] = useState('any');
   const [statusFilter, setStatusFilter] = useState(['new']);
 
-  const [filteredGames, setFilteredGames] = useState(getFiltered(searchFilter, platformFilter, statusFilter));
+  const [filteredGames, setFilteredGames] = useState<any[]>([]);
 
   const updateFilter = useEffect(() => {
-    setFilteredGames(getFiltered(searchFilter, platformFilter, statusFilter));
-  }, [searchFilter, platformFilter, statusFilter])
+    setFilteredGames(getFiltered(searchFilter, platformFilter, statusFilter, gameStatus));
+  }, [searchFilter, platformFilter, statusFilter, gameStatus])
 
-  const handleSearchChange = (evt) => {
+  const handleSearchChange = (evt: any) => {
     setSearchFilter(evt.target.value);
   };
 
-  const handlePlatformChange = (event, newPlatform) => {
+  const handlePlatformChange = (event: any, newPlatform: string) => {
     setPlatformFilter(newPlatform);
   };
 
-  const handleStatusChange = (event, newStatus) => {
+  const handleStatusChange = (event: any, newStatus: string[]) => {
     setStatusFilter(newStatus);
   };
   
@@ -65,9 +66,22 @@ function AllGames() {
 
       <ToggleButtonGroup
         color="primary"
+        aria-label="Status"
+        value={statusFilter}
+        size='small'
+        onChange={handleStatusChange}
+      >
+        <ToggleButton value="new">New</ToggleButton>
+        <ToggleButton value="played">Played</ToggleButton>
+        <ToggleButton value="ignored">Ignored</ToggleButton>
+      </ToggleButtonGroup>
+
+      <ToggleButtonGroup
+        color="primary"
         exclusive
         aria-label="Platform"
         value={platformFilter}
+        size='small'
         onChange={handlePlatformChange}
       >
         <ToggleButton value="any">Any</ToggleButton>
@@ -76,17 +90,6 @@ function AllGames() {
         <ToggleButton value="IOS">iOS</ToggleButton>
         <ToggleButton value="Steam">Steam</ToggleButton>
         <ToggleButton value="Windows">Windows</ToggleButton>
-      </ToggleButtonGroup>
-
-      <ToggleButtonGroup
-        color="primary"
-        aria-label="Status"
-        value={statusFilter}
-        onChange={handleStatusChange}
-      >
-        <ToggleButton value="new">New</ToggleButton>
-        <ToggleButton value="played">Played</ToggleButton>
-        <ToggleButton value="ignored">Ignored</ToggleButton>
       </ToggleButtonGroup>
     </div>
 
@@ -103,11 +106,11 @@ function AllGames() {
 
 export default AllGames;
 
-function PlatformCell({row}) {
+function PlatformCell({row}: {row: any}) {
   return <span className="platform-cell">
     {Object.entries(row.platforms).map(([key, value]) => 
       <Link
-        href={value.link}
+        href={(value as any).link}
         target="_blank"
         rel="noreferrer"
         key={key}
@@ -116,27 +119,42 @@ function PlatformCell({row}) {
   </span>;
 }
 
-function ControlsCell({row}) {
+function ControlsCell({row}: {row: any}) {
+  const gameStatus = useContext(GameStatusContext);
+
   return <div className="controls-cell">
     <Button
       variant="outlined"
       startIcon={<CheckRoundedIcon />}
       size="small"
+      onClick={() => gameStatus.markGameAsPlayed(row.id)}
     >Played</Button>
     <Button
       variant="outlined"
       startIcon={<VisibilityOffIcon />}
       size="small"
       color="error"
+      onClick={() => gameStatus.markGameAsIgnored(row.id)}
     >Ignore</Button>
   </div>;
 }
 
-function getFiltered(search, platform, statuses) {
+function getFiltered(search: string, platform: string, statuses: string[], gameStatus: GameStatusContext) {
   return allGames.filter(ag => {
     const nameMatches = search ? ag.name.includes(search) : true;
     const platformMatches = platform == 'any' || Object.keys(ag.platforms).includes(platform);
-    const statusMatches = true;
+    let statusMatches = false;
+    const isPlayed = gameStatus.playedGames.includes(ag.id);
+    const isIgnored = gameStatus.ignoredGames.includes(ag.id);
+    if (statuses.includes('new')) {
+      statusMatches = statusMatches || (!isPlayed && !isIgnored);
+    }
+    if (statuses.includes('played')) {
+      statusMatches = statusMatches || isPlayed;
+    }
+    if (statuses.includes('ignored')) {
+      statusMatches = statusMatches || isIgnored;
+    }
 
     return nameMatches && platformMatches && statusMatches;
   })

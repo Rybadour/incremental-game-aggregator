@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import './App.css';
 import AllGames from './components/all-games';
+import { GameStatusProvider } from './contexts/game-status';
 
 const ColorModeContext = React.createContext({ mode: 'dark', toggleColorMode: () => {} });
 
@@ -112,7 +113,9 @@ function AppBody() {
       </AppBar>
 
       <div className="app-body">
-        <AllGames />
+        <GameStatusProvider>
+          <AllGames />
+        </GameStatusProvider>
       </div>
     </div>
   );

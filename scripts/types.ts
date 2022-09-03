@@ -1,5 +1,3 @@
-import { Features } from "snoowrap/dist/objects/RedditUser";
-
 export interface NewGame {
   name: string;
   source: string;

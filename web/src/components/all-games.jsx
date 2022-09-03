@@ -10,12 +10,29 @@ import { upperFirst } from '../util';
 import './all-games.css';
 import { Stack } from "@mui/system";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function AllGames() {
+  const [searchFilter, setSearchFilter] = useState('');
   const [platformFilter, setPlatformFilter] = useState('any');
+  const [statusFilter, setStatusFilter] = useState(['new']);
+
+  const [filteredGames, setFilteredGames] = useState(getFiltered(searchFilter, platformFilter, statusFilter));
+
+  const updateFilter = useEffect(() => {
+    setFilteredGames(getFiltered(searchFilter, platformFilter, statusFilter));
+  }, [searchFilter, platformFilter, statusFilter])
+
+  const handleSearchChange = (evt) => {
+    setSearchFilter(evt.target.value);
+  };
 
   const handlePlatformChange = (event, newPlatform) => {
     setPlatformFilter(newPlatform);
+  };
+
+  const handleStatusChange = (event, newStatus) => {
+    setStatusFilter(newStatus);
   };
   
   const columns = [{
@@ -37,8 +54,10 @@ function AllGames() {
   return <div className="all-games-page">
     <Typography variant="h4" component="h2" marginBottom={2}>All Games</Typography>
 
-    <Stack direction="row" spacing={2} marginBottom={2} height={40}>
+    <div className="filters">
       <TextField placeholder="Search" variant="filled" size="small" hiddenLabel
+        value={searchFilter}
+        onChange={handleSearchChange}
         InputProps={{
           startAdornment: <SearchIcon fontSize="small" />,
         }}
@@ -52,20 +71,31 @@ function AllGames() {
         onChange={handlePlatformChange}
       >
         <ToggleButton value="any">Any</ToggleButton>
-        <ToggleButton value="web">Web</ToggleButton>
-        <ToggleButton value="android">Android</ToggleButton>
-        <ToggleButton value="ios">iOS</ToggleButton>
-        <ToggleButton value="steam">Steam</ToggleButton>
-        <ToggleButton value="windows">Windows</ToggleButton>
+        <ToggleButton value="Web">Web</ToggleButton>
+        <ToggleButton value="Android">Android</ToggleButton>
+        <ToggleButton value="IOS">iOS</ToggleButton>
+        <ToggleButton value="Steam">Steam</ToggleButton>
+        <ToggleButton value="Windows">Windows</ToggleButton>
       </ToggleButtonGroup>
-    </Stack>
+
+      <ToggleButtonGroup
+        color="primary"
+        aria-label="Status"
+        value={statusFilter}
+        onChange={handleStatusChange}
+      >
+        <ToggleButton value="new">New</ToggleButton>
+        <ToggleButton value="played">Played</ToggleButton>
+        <ToggleButton value="ignored">Ignored</ToggleButton>
+      </ToggleButtonGroup>
+    </div>
 
     <div className="game-table">
       <DataGrid
         disableColumnFilter
 
         columns={columns}
-        rows={allGames}
+        rows={filteredGames}
       />
     </div>
   </div>;
@@ -100,4 +130,14 @@ function ControlsCell({row}) {
       color="error"
     >Ignore</Button>
   </div>;
+}
+
+function getFiltered(search, platform, statuses) {
+  return allGames.filter(ag => {
+    const nameMatches = search ? ag.name.includes(search) : true;
+    const platformMatches = platform == 'any' || Object.keys(ag.platforms).includes(platform);
+    const statusMatches = true;
+
+    return nameMatches && platformMatches && statusMatches;
+  })
 }

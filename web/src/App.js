@@ -8,34 +8,43 @@ import CssBaseline from '@mui/material/CssBaseline';
 import './App.css';
 import AllGames from './components/all-games';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+const ColorModeContext = React.createContext({ mode: 'dark', toggleColorMode: () => {} });
 
 const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [mode, setMode] = useState(prefersDarkMode ? 'dark' : 'light');
+  const colorMode = React.useMemo(
+    () => ({
+      mode,
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [mode],
+  );
 
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode: prefersDarkMode ? 'dark' : 'light',
+          mode,
         },
       }),
-    [prefersDarkMode],
+    [mode],
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBody />
-    </ThemeProvider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppBody />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 };
 
 function AppBody() {
+  const colorMode = React.useContext(ColorModeContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenu = () => {
@@ -88,7 +97,9 @@ function AppBody() {
                   </ListItem>
                 ))}
                 <ListItem>
-                  <FormControlLabel control={<Switch defaultChecked />} label="Dark Mode" />
+                  <FormControlLabel control={
+                    <Switch checked={colorMode.mode == 'dark'} onChange={colorMode.toggleColorMode} />
+                  } label="Dark Mode" />
                 </ListItem>
               </List>
             </Drawer>

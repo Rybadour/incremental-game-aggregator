@@ -17,3 +17,11 @@
   display: flex;
   grid-gap: 20px;
 }
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}

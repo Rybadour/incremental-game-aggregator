@@ -5,39 +5,39 @@ import React, { createContext, useState } from "react";
 const LS_KEY = 'game-statuses';
 export const AUTO_SAVE_TIME = 5000;
 
+const savedStatuses = getStatusFromStorage();
+
 export type GameStatusContext = {
   playedGames: number[],
   ignoredGames: number[],
-  autoSaveTime: number,
 
   markGameAsPlayed: (id: number) => void,
   markGameAsIgnored: (id: number) => void,
   save: () => void,
-  load: () => void,
 };
 
 const defaultContext: GameStatusContext = {
-  playedGames: [],
-  ignoredGames: [],
-  autoSaveTime: AUTO_SAVE_TIME,
+  playedGames: savedStatuses.playedGames,
+  ignoredGames: savedStatuses.ignoredGames,
 
   markGameAsPlayed: (id) => {},
   markGameAsIgnored: (id) => {},
   save: () => {},
-  load: () => {},
 };
 
 export const GameStatusContext = createContext(defaultContext);
 
 export function GameStatusProvider(props: Record<string, any>) {
-  const [playedGames, setPlayedGames] = useState<number[]>([]);
-  const [ignoredGames, setIgnoredGames] = useState<number[]>([]);
-  const [autoSaveTime, setAutoSaveTime] = useState(defaultContext.autoSaveTime);
+  let saveTimeout: ReturnType<typeof setTimeout> | null;
+  const [playedGames, setPlayedGames] = useState<number[]>(defaultContext.playedGames);
+  const [ignoredGames, setIgnoredGames] = useState<number[]>(defaultContext.ignoredGames);
 
   function markGameAsPlayed(id: number) {
     const newPlayedGames = [...playedGames];
     newPlayedGames.push(id);
     setPlayedGames(newPlayedGames);
+
+    saveOnTimeout();
   }
 
   function markGameAsIgnored(id: number) {
@@ -46,23 +46,40 @@ export function GameStatusProvider(props: Record<string, any>) {
     setIgnoredGames(newIgnoredGames);
   }
 
-  function save() {
-    localStorage.setItem(LS_KEY, '');
+  function saveOnTimeout() {
+    if (!saveTimeout) {
+      saveTimeout = setTimeout(() => {
+        save();
+        saveTimeout = null;
+      }, AUTO_SAVE_TIME);
+    }
   }
 
-  function load() {
-    const rawData: string | null = localStorage.getItem(LS_KEY);
-    if (!rawData) return;
-
+  function save() {
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      playedGames,
+      ignoredGames,
+    }));
   }
 
   return (
     <GameStatusContext.Provider
       value={{
-        playedGames, ignoredGames, autoSaveTime,
-        markGameAsPlayed, markGameAsIgnored, save, load,
+        playedGames, ignoredGames,
+        markGameAsPlayed, markGameAsIgnored, save,
       }}
       {...props}
     />
   );
+}
+
+function getStatusFromStorage() {
+  const rawData: string | null = localStorage.getItem(LS_KEY);
+  if (!rawData) return {};
+
+  try {
+    return JSON.parse(rawData);
+  } catch (err) {
+    return {};
+  }
 }

@@ -10,7 +10,6 @@ import { upperFirst } from '../util';
 import './all-games.css';
 import { useContext, useState, useEffect } from "react";
 import { GameStatusContext } from "../contexts/game-status";
-import { Games } from "@mui/icons-material";
 
 function AllGames() {
   const gameStatus = useContext(GameStatusContext);
@@ -19,6 +18,10 @@ function AllGames() {
   const [statusFilter, setStatusFilter] = useState(['new']);
 
   const [filteredGames, setFilteredGames] = useState<any[]>([]);
+
+  useEffect(() => {
+    window.onbeforeunload = () => gameStatus.save();
+  }, [gameStatus])
 
   const updateFilter = useEffect(() => {
     setFilteredGames(getFiltered(searchFilter, platformFilter, statusFilter, gameStatus));

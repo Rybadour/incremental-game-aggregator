@@ -17,8 +17,8 @@ export type GameStatusContext = {
 };
 
 const defaultContext: GameStatusContext = {
-  playedGames: savedStatuses.playedGames,
-  ignoredGames: savedStatuses.ignoredGames,
+  playedGames: savedStatuses.playedGames ?? [],
+  ignoredGames: savedStatuses.ignoredGames ?? [],
 
   markGameAsPlayed: (id) => {},
   markGameAsIgnored: (id) => {},

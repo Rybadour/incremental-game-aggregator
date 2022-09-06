@@ -103,7 +103,7 @@ function AppBody() {
           </div>
 
           <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }}>
-            Incremental Game Aggregator
+            Incregator - The Incremental Game Aggregator
           </Typography>
         </Toolbar>
       </AppBar>

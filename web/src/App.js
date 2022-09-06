@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { AppBar, Dialog, DialogContent, DialogTitle, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Switch, ToggleButton, Toolbar, Typography, useMediaQuery } from '@mui/material';
+import { AppBar, Box, Dialog, DialogContent, DialogTitle, Divider, Drawer, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Switch, ToggleButton, Toolbar, Typography, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -65,60 +65,60 @@ function AppBody() {
   };
 
   return (
-    <div className="app">
+    <Box sx={{height: "100%", display: "flex", flexDirection: "column"}}>
       <AppBar position="static">
-        <Toolbar variant="dense">
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={openMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Drawer
-              id="menu-appbar"
-              anchor="left"
-              keepMounted
-              PaperProps={{style: {minWidth: 200}}}
-              open={isMenuOpen}
-              onClose={closeMenu}
-            >
-              <List>
-                <ListItem disablePadding>
-                  <ListItemButton onClick={openFaq}>
-                    <ListItemText primary="FAQ" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem>
-                  <FormControlLabel control={
-                    <Switch checked={colorMode.mode == 'dark'} onChange={colorMode.toggleColorMode} />
-                  } label="Dark Mode" />
-                </ListItem>
-              </List>
-            </Drawer>
-          </div>
+        <Toolbar variant="dense" sx={{}}>
+          <IconButton
+            size="large"
+            edge="start"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={openMenu}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
 
-          <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant={{md: "h6", sm: "span"}} color="inherit" component="div" sx={{ flexGrow: 1 }}>
             Incregator - The Incremental Game Aggregator
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <div className="app-body">
+      <Box p={{md: 3, xs: 1}} height="100%">
         <GameStatusProvider>
           <AllGames />
         </GameStatusProvider>
-      </div>
+      </Box>
+
+      <Drawer
+        id="menu-appbar"
+        anchor="left"
+        keepMounted
+        PaperProps={{style: {minWidth: 200}}}
+        open={isMenuOpen}
+        onClose={closeMenu}
+      >
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton onClick={openFaq}>
+              <ListItemText primary="FAQ" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <FormControlLabel control={
+              <Switch checked={colorMode.mode == 'dark'} onChange={colorMode.toggleColorMode} />
+            } label="Dark Mode" />
+          </ListItem>
+        </List>
+      </Drawer>
 
       <FaqDialog
         isOpen={isFaqOpen}
         onClose={closeFaq}
       />
-    </div>
+    </Box>
   );
 }
 

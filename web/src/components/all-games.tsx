@@ -1,8 +1,9 @@
-import { Button, Link, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, IconButton, Link, TextField, ToggleButton, ToggleButtonGroup, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import SearchIcon from "@mui/icons-material/Search";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import allGames from '../data/all-games.json';
 import { upperFirst } from '../util';
@@ -12,6 +13,9 @@ import { useContext, useState, useEffect } from "react";
 import { GameStatusContext } from "../contexts/game-status";
 
 function AllGames() {
+  const theme = useTheme();
+  const smallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const gameStatus = useContext(GameStatusContext);
   const [searchFilter, setSearchFilter] = useState('');
   const [platformFilter, setPlatformFilter] = useState('any');
@@ -45,7 +49,7 @@ function AllGames() {
     flex: 1,
   }, {
     field: 'platforms',
-    headerName: 'Platforms/Links',
+    headerName: 'Platforms',
     flex: 1,
     renderCell: PlatformCell
   }, {
@@ -56,43 +60,53 @@ function AllGames() {
   }];
 
   return <div className="all-games-page">
-    <div className="filters">
-      <TextField placeholder="Search" variant="filled" size="small" hiddenLabel
-        value={searchFilter}
-        onChange={handleSearchChange}
-        InputProps={{
-          startAdornment: <SearchIcon fontSize="small" />,
-        }}
-      />
-
-      <ToggleButtonGroup
-        color="primary"
-        aria-label="Status"
-        value={statusFilter}
-        size='small'
-        onChange={handleStatusChange}
+    <Accordion disableGutters defaultExpanded={!smallScreen}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="filters-content"
+        id="filters-header"
+        sx={{marginBottom: 0}}
       >
-        <ToggleButton value="new">New</ToggleButton>
-        <ToggleButton value="played">Played</ToggleButton>
-        <ToggleButton value="ignored">Ignored</ToggleButton>
-      </ToggleButtonGroup>
+        <Typography>Filters</Typography>
+      </AccordionSummary>
+      <AccordionDetails className="filters">
+        <TextField placeholder="Search" variant="filled" size="small" hiddenLabel
+          value={searchFilter}
+          onChange={handleSearchChange}
+          InputProps={{
+            startAdornment: <SearchIcon fontSize="small" />,
+          }}
+        />
 
-      <ToggleButtonGroup
-        color="primary"
-        exclusive
-        aria-label="Platform"
-        value={platformFilter}
-        size='small'
-        onChange={handlePlatformChange}
-      >
-        <ToggleButton value="any">Any</ToggleButton>
-        <ToggleButton value="Web">Web</ToggleButton>
-        <ToggleButton value="Android">Android</ToggleButton>
-        <ToggleButton value="IOS">iOS</ToggleButton>
-        <ToggleButton value="Steam">Steam</ToggleButton>
-        <ToggleButton value="Windows">Windows</ToggleButton>
-      </ToggleButtonGroup>
-    </div>
+        <ToggleButtonGroup
+          color="primary"
+          aria-label="Status"
+          value={statusFilter}
+          size='small'
+          onChange={handleStatusChange}
+        >
+          <ToggleButton value="new">New</ToggleButton>
+          <ToggleButton value="played">Played</ToggleButton>
+          <ToggleButton value="ignored">Ignored</ToggleButton>
+        </ToggleButtonGroup>
+
+        <ToggleButtonGroup
+          color="primary"
+          exclusive
+          aria-label="Platform"
+          value={platformFilter}
+          size='small'
+          onChange={handlePlatformChange}
+        >
+          <ToggleButton value="any">Any</ToggleButton>
+          <ToggleButton value="Web">Web</ToggleButton>
+          <ToggleButton value="Android">Android</ToggleButton>
+          <ToggleButton value="IOS">iOS</ToggleButton>
+          <ToggleButton value="Steam">Steam</ToggleButton>
+          <ToggleButton value="Windows">Windows</ToggleButton>
+        </ToggleButtonGroup>
+      </AccordionDetails>
+    </Accordion>
 
     <div className="game-table">
       <DataGrid
@@ -122,21 +136,41 @@ function PlatformCell({row}: {row: any}) {
 
 function ControlsCell({row}: {row: any}) {
   const gameStatus = useContext(GameStatusContext);
+  const theme = useTheme();
+  const smallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return <div className="controls-cell">
-    <Button
-      variant="outlined"
-      startIcon={<CheckRoundedIcon />}
-      size="small"
-      onClick={() => gameStatus.markGameAsPlayed(row.id)}
-    >Played</Button>
-    <Button
-      variant="outlined"
-      startIcon={<VisibilityOffIcon />}
-      size="small"
-      color="error"
-      onClick={() => gameStatus.markGameAsIgnored(row.id)}
-    >Ignore</Button>
+    {smallScreen ? <>
+      <IconButton
+        size="small"
+        color="primary"
+        onClick={() => gameStatus.markGameAsPlayed(row.id)}
+      >
+        <CheckRoundedIcon />
+      </IconButton>
+      <IconButton
+        size="small"
+        color="error"
+        onClick={() => gameStatus.markGameAsIgnored(row.id)}
+      >
+        <VisibilityOffIcon />
+      </IconButton>
+    </> :
+    <>
+      <Button
+        variant="outlined"
+        startIcon={<CheckRoundedIcon />}
+        size="small"
+        onClick={() => gameStatus.markGameAsPlayed(row.id)}
+      >Played</Button>
+      <Button
+        variant="outlined"
+        startIcon={<VisibilityOffIcon />}
+        size="small"
+        color="error"
+        onClick={() => gameStatus.markGameAsIgnored(row.id)}
+      >Ignore</Button>
+    </>}
   </div>;
 }
 

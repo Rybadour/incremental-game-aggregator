@@ -56,8 +56,6 @@ function AllGames() {
   }];
 
   return <div className="all-games-page">
-    <Typography variant="h4" component="h2" marginBottom={2}>All Games</Typography>
-
     <div className="filters">
       <TextField placeholder="Search" variant="filled" size="small" hiddenLabel
         value={searchFilter}

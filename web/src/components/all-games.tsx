@@ -192,5 +192,5 @@ function getFiltered(search: string, platform: string, statuses: string[], gameS
     }
 
     return nameMatches && platformMatches && statusMatches;
-  })
+  });
 }

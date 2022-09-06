@@ -170,5 +170,81 @@
         "link": "https://apps.apple.com/us/app/tap-ninja-idle-game/id1586558847"
       }
     }
+  },
+  {
+    "id": 16,
+    "name": "Inactive Testing",
+    "source": "http://reddit.com/r/incremental_games/comments/x7e783/early_access_release_inactive_testing_and_coop_co/",
+    "platforms": {
+      "Web": {
+        "link": "https://mrbacon470.github.io/Inactive-Testing/"
+      }
+    }
+  },
+  {
+    "id": 17,
+    "name": "Machinery",
+    "source": "http://reddit.com/r/incremental_games/comments/x7913y/machinery_0995_major_update_released/",
+    "platforms": {
+      "Web": {
+        "link": "https://louigiverona.com/machinery/0.99.5/"
+      }
+    }
+  },
+  {
+    "id": 18,
+    "name": "Idle Cave Miner",
+    "source": "http://reddit.com/r/incremental_games/comments/x77s5l/idle_cave_miner_is_now_in_open_beta_please_share/",
+    "platforms": {
+      "Android": {
+        "link": "https://play.google.com/store/apps/details?id=com.ColdHours.IdleMiner"
+      }
+    }
+  },
+  {
+    "id": 19,
+    "name": "Nordicandia",
+    "source": "http://reddit.com/r/incremental_games/comments/x6qyp4/nordicandia_just_dropped_non_p2pwn_online_idle/",
+    "platforms": {
+      "Android": {
+        "link": "https://play.google.com/store/apps/details?id=com.IterativeStudios.Nordicandia&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+      },
+      "IOS": {
+        "link": "https://apps.apple.com/app/nordicandia-semi-idle-rpg/id1561347553"
+      },
+      "Steam": {
+        "link": "https://store.steampowered.com/app/1503790"
+      }
+    }
+  },
+  {
+    "id": 20,
+    "name": "Ungrow",
+    "source": "http://reddit.com/r/incremental_games/comments/x6nxto/ungrow_by_erkberg/",
+    "platforms": {
+      "Web": {
+        "link": "https://erkberg.itch.io/ungrow"
+      }
+    }
+  },
+  {
+    "id": 21,
+    "name": "Peter Talisman",
+    "source": "http://reddit.com/r/incremental_games/comments/x6nxto/ungrow_by_erkberg/",
+    "platforms": {
+      "Web": {
+        "link": "https://petertalisman.quest/"
+      }
+    }
+  },
+  {
+    "id": 22,
+    "name": "The Counting Apparatus",
+    "source": "http://reddit.com/r/incremental_games/comments/x58l37/the_return_of_the_counting_apparatus_a_discord/",
+    "platforms": {
+      "Other": {
+        "link": "https://discord.gg/byD4brxMv2"
+      }
+    }
   }
 ]

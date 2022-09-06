@@ -15,7 +15,7 @@ const allGamesFile = path.join('..', 'data', 'all-games.json');
   let numNewPlatforms = 0;
   let numDuplicates = 0;
   newGames.forEach(newGame => {
-    const gameByName = allGames.find(ag => [newGame.name, ...newGame.otherNames].includes(ag.name));
+    const gameByName = allGames.find(ag => newGame.name === ag.name);
     if (gameByName) {
       let anyNewPlatforms = false;
       newGame.links.forEach(link => {
